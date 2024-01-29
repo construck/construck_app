@@ -106,6 +106,21 @@ export default function MenuBar() {
             </div>
           </div>
         )}
+        {canSeeDispatches && (
+          <div
+            className={
+              screen === 'workReport'
+                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+            }
+            onClick={() => setScreen('workReport')}
+          >
+            <DocumentDuplicateIcon className="h-5 w-5" />
+            <div className="hidden w-1/2 font-semibold md:block">
+              Dispatch Report
+            </div>
+          </div>
+        )}
 
         {isProjectManager && (
           <div

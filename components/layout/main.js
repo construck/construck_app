@@ -15,6 +15,7 @@ import Maintenance from '../screens/maintenance';
 import Items from '../screens/items';
 import Mechanics from '../screens/mechanics';
 import Mechanical from '../screens/mechanicals';
+import WorkReport from '../screens/workReport';
 
 export default function Main() {
   let { screen, setScreen } = useContext(ScreenContext)
@@ -36,6 +37,7 @@ export default function Main() {
       {(screen === 'workshop' || screen === 'items') && <Items />}
       {screen === 'mechanics' && <Mechanics />}
       {screen === 'mechanical' && <Mechanical />}
+      {screen === 'workReport' && <WorkReport />}
     </div>
   )
 }

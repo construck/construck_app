@@ -2001,7 +2001,8 @@ export default function Workdata() {
       )}&isVendor=${isVendor}&vendorName=${encodeURIComponent(
         user.firstName
       )}&userProject=${
-        user?.assignedProjects[0] && user?.assignedProjects[0]?.prjDescription
+        user?.assignedProjects?.length > 1 &&
+        user?.assignedProjects[0]?.prjDescription
       }&userProjects=${JSON.stringify(user?.assignedProjects)}`,
       {
         headers: {
@@ -2058,7 +2059,7 @@ export default function Workdata() {
     setWorkEndDate(Date.today().clearTime().moveToLastDayOfMonth())
     fetch(
       `${url}/works/filtered/${pageNumber}?userProject=${
-        user?.assignedProjects[0] && user?.assignedProjects[0]?.prjDescription
+        user?.assignedProjects?.length>=1 && user?.assignedProjects[0]?.prjDescription
       }&userType=${user.userType}&companyName=${
         user.company?.name
       }&&startDate=${startDate}&endDate=${endDate}&searchText=${search}&project=${encodeURIComponent(
