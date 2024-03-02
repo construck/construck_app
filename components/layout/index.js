@@ -24,8 +24,15 @@ export default function Layout() {
     <div className="flex flex-col">
       {user?.loggedIn && (
         <div className="flex flex-row">
-          <MenuBar />
-          <Main />
+          <div className='fixed w-72 top-0 start-0 h-screen border-r border-gray-200'>
+            <MenuBar />
+          </div>
+          <div className="relative w-full lg:ml-72 ml-0">
+            <div className="sticky top-0 right-0 z-20 bg-white backdrop-blur-md border-b-4 border-gray-200">
+              <div className='px-6 py-3.5'>Header</div>
+            </div>
+              <Main />
+          </div>
         </div>
       )}
       {!user?.loggedIn && <Login />}

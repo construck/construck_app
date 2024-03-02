@@ -11,19 +11,19 @@ export default function MSubmitButton({
 }) {
   function getClassByIntent(intent) {
     if (intent === 'primary') {
-      return 'flex items-center justify-center space-x-1 bg-white rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-white rounded  cursor-pointer px-6 py-2.5  active:scale-95 hover:bg-gray-100 text-zinc-800'
     } else if (intent === 'warning') {
-      return 'flex items-center justify-center space-x-1 bg-yellow-200 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-yellow-200 rounded  cursor-pointer px-6 py-2.5  active:scale-95 hover:bg-gray-100 text-zinc-800'
     } else if (intent === 'danger') {
-      return 'flex items-center justify-center space-x-1 bg-red-200 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-red-200 rounded  cursor-pointer px-6 py-2.5  active:scale-95 hover:bg-gray-100 text-zinc-800'
     } else if (intent === 'neutral') {
-      return 'flex items-center justify-center space-x-1 bg-gray-50 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-gray-50 rounded  cursor-pointer px-6 py-2.5  active:scale-95 hover:bg-gray-100 text-zinc-800'
     } else if (intent === 'success') {
-      return 'flex items-center justify-center space-x-1 bg-green-100 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-green-100 rounded  cursor-pointer px-6 py-2.5  active:scale-95 hover:bg-gray-100 text-zinc-800'
     } else if (intent === 'disabled') {
-      return 'flex items-center justify-center space-x-1 bg-gray-100 rounded  ring-1 ring-zinc-300 shadow-sm cursor-not-allowed px-3 py-2 w-20 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-gray-100 rounded  cursor-not-allowed px-6 py-2.5 text-zinc-800'
     } else {
-      return 'flex items-center justify-center space-x-1 bg-blue-400 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-blue-500 text-white'
+      return 'flex items-center justify-center space-x-1 bg-blue-500 rounded  cursor-pointer px-6 py-2.5  active:scale-95 hover:bg-blue-500 text-white'
     }
   }
   return (

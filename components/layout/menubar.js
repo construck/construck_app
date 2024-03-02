@@ -54,7 +54,8 @@ export default function MenuBar() {
     role === 'customer-project-manager' ||
     role === 'customer-site-manager'
 
-  let isProjectManager = role === 'customer-project-manager' || role ==='customer-site-manager'
+  let isProjectManager =
+    role === 'customer-project-manager' || role === 'customer-site-manager'
 
   let isWorkshopUser =
     role === 'workshop-manager' ||
@@ -69,7 +70,7 @@ export default function MenuBar() {
     setUser({})
   }
   return (
-    <div className="w-30 flex min-h-screen flex-col items-center justify-between overflow-y-auto bg-neutral-200 md:w-72">
+    <div className="flex min-h-screen flex-col items-center justify-between overflow-y-auto bg-gray-100 md:w-72">
       {/* Menu items */}
 
       <div className="flex w-full flex-col items-center">
@@ -81,13 +82,13 @@ export default function MenuBar() {
           <div
             className={
               screen === 'dashboard'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-neutral-50 py-5 text-sky-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-neutral-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
             }
             onClick={() => setScreen('dashboard')}
           >
             <ChartBarIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">Dashboard</div>
+            <div className="hidden font-semibold md:block">Dashboard</div>
           </div>
         )}
 
@@ -95,30 +96,44 @@ export default function MenuBar() {
           <div
             className={
               screen === 'workData'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
             }
             onClick={() => setScreen('workData')}
           >
             <DocumentDuplicateIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">
+            <div className="hidden font-semibold md:block">
               Dispatch Forms
             </div>
           </div>
         )}
 
         {isProjectManager && (
-          <div
-            className={
-              screen === 'costs'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
-            }
-            onClick={() => setScreen('costs')}
-          >
-            <BanknotesIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">Costs</div>
-          </div>
+          <>
+            <div
+              className={
+                screen === 'costs'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
+              }
+              onClick={() => setScreen('costs')}
+            >
+              <BanknotesIcon className="h-5 w-5" />
+              <div className="hidden font-semibold md:block">Costs</div>
+            </div>
+            {/* SITE MANAGER && PROJECT MANAGER */}
+            <div
+              className={
+                screen === 'requestequipment'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
+              }
+              onClick={() => setScreen('requestequipment')}
+            >
+              <BanknotesIcon className="h-5 w-5" />
+              <div className="hidden font-semibold md:block">Request equipment</div>
+            </div>
+          </>
         )}
 
         {!isVendor && !isCustomer && (
@@ -126,13 +141,13 @@ export default function MenuBar() {
             <div
               className={
                 screen === 'customers'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
               }
               onClick={() => setScreen('customers')}
             >
               <UserGroupIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">
+              <div className="hidden font-semibold md:block">
                 Customers
               </div>
             </div>
@@ -140,13 +155,13 @@ export default function MenuBar() {
             <div
               className={
                 screen === 'equipments'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
               }
               onClick={() => setScreen('equipments')}
             >
               <TruckIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">
+              <div className="hidden font-semibold md:block">
                 Equipment
               </div>
             </div>
@@ -154,13 +169,13 @@ export default function MenuBar() {
             <div
               className={
                 screen === 'projects'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
               }
               onClick={() => setScreen('projects')}
             >
               <QueueListIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">
+              <div className="hidden font-semibold md:block">
                 Projects
               </div>
             </div>
@@ -168,13 +183,13 @@ export default function MenuBar() {
             {/* <div
               className={
                 screen === 'profile'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
               }
               onClick={() => setScreen('profile')}
             >
               <UserIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">Profile</div>
+              <div className="hidden font-semibold md:block">Profile</div>
             </div> */}
           </>
         )}
@@ -184,13 +199,13 @@ export default function MenuBar() {
             <div
               className={
                 screen === 'users'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
               }
               onClick={() => setScreen('users')}
             >
               <UsersIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">Users</div>
+              <div className="hidden font-semibold md:block">Users</div>
             </div>
           </>
         )}
@@ -199,13 +214,13 @@ export default function MenuBar() {
           <div
             className={
               screen === 'drivers'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
             }
             onClick={() => setScreen('drivers')}
           >
             <IdentificationIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">Drivers</div>
+            <div className="hidden font-semibold md:block">Drivers</div>
           </div>
         )}
 
@@ -213,13 +228,13 @@ export default function MenuBar() {
           <div
             className={
               screen === 'vendors'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
             }
             onClick={() => setScreen('vendors')}
           >
             <UserGroupIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">Vendors</div>
+            <div className="hidden font-semibold md:block">Vendors</div>
           </div>
         )}
 
@@ -227,13 +242,13 @@ export default function MenuBar() {
           <div
             className={
               screen === 'settings'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
             }
             onClick={() => setScreen('settings')}
           >
             <CogIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">Settings</div>
+            <div className="hidden font-semibold md:block">Settings</div>
           </div>
         )} */}
 
@@ -241,13 +256,13 @@ export default function MenuBar() {
           <div
             className={
               screen === 'maintenance'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-slate-50 py-5 text-sky-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-slate-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
             }
             onClick={() => setScreen('maintenance')}
           >
             <WrenchIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">
+            <div className="hidden font-semibold md:block">
               Maintenance
             </div>
           </div>
@@ -261,13 +276,13 @@ export default function MenuBar() {
                 screen === 'items' ||
                 screen === 'mechanics' ||
                 screen === 'mechanical'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-slate-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+                  ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-slate-50 py-5 text-sky-700'
+                  : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-black'
               }
               onClick={() => setScreen('workshop')}
             >
               <WrenchScrewdriverIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">
+              <div className="hidden font-semibold md:block">
                 Workshop
               </div>
             </div>
@@ -285,8 +300,8 @@ export default function MenuBar() {
               <div
                 className={
                   screen == 'workshop' || screen === 'items'
-                    ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-slate-200 py-3 text-sky-700'
-                    : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-3 text-black'
+                    ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-slate-200 py-3 text-sky-700'
+                    : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-3 text-black'
                 }
                 onClick={() => setScreen('items')}
               >
@@ -298,8 +313,8 @@ export default function MenuBar() {
               <div
                 className={
                   screen == 'mechanics'
-                    ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-slate-200 py-3 text-sky-700'
-                    : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-3 text-black'
+                    ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-slate-200 py-3 text-sky-700'
+                    : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-3 text-black'
                 }
                 onClick={() => setScreen('mechanics')}
               >
@@ -311,8 +326,8 @@ export default function MenuBar() {
               <div
                 className={
                   screen == 'mechanical'
-                    ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-slate-200 py-3 text-sky-700'
-                    : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-3 text-black'
+                    ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-slate-200 py-3 text-sky-700'
+                    : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-3 text-black'
                 }
                 onClick={() => setScreen('mechanical')}
               >
@@ -329,18 +344,18 @@ export default function MenuBar() {
           <div
             className={
               screen === 'reversals'
-                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-red-700'
-                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-red-700'
+                ? 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 bg-gray-50 py-5 text-red-700'
+                : 'flex w-full cursor-pointer flex-row items-center pl-6 space-x-3 py-5 text-red-700'
             }
             onClick={() => setScreen('reversals')}
           >
             <ArrowPathIcon className="h-5 w-5" />
-            <div className="hidden w-1/2 font-semibold md:block">Reversals</div>
+            <div className="hidden font-semibold md:block">Reversals</div>
           </div>
         )}
       </div>
 
-      <div className="flex w-full flex-col items-center px-5">
+      {/* <div className="flex w-full flex-col items-center px-5">
         <div className="mb-5 flex w-full flex-col justify-evenly md:flex-row">
           <ArrowLeftOnRectangleIcon
             className="mb-1 h-7 w-7 cursor-pointer text-red-400"
@@ -354,7 +369,7 @@ export default function MenuBar() {
           </div>
           <div>{user.firstName + ' ' + user.lastName}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

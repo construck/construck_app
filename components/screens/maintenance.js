@@ -120,7 +120,7 @@ const Maintenance = () => {
   let [endDate, setEndDate] = useState(moment().format('YYYY-MM-DD'))
 
   const url = process.env.NEXT_PUBLIC_BKEND_URL
-  const newUrl = process.env.NEXT_PUBLIC_BKEND_URL
+  // const url = process.env.NEXT_PUBLIC_BKEND_URL
   const apiUsername = process.env.NEXT_PUBLIC_API_USERNAME
   const apiPassword = process.env.NEXT_PUBLIC_API_PASSWORD
   let foundItem = ''
@@ -349,7 +349,7 @@ const Maintenance = () => {
 
   const download = (query) => {
     fetch(
-      `${newUrl}/api/maintenance?limit=-1&page=${0}&status=${'all'}&search=${search}&download=1&startDate=${startDate}&endDate=${endDate}`,
+      `${url}/api/maintenance?limit=-1&page=${0}&status=${'all'}&search=${search}&download=1&startDate=${startDate}&endDate=${endDate}`,
       {
         headers: {
           Authorization:
@@ -579,7 +579,7 @@ const Maintenance = () => {
   }
 
   const populateJobLogsCard = () => {
-    fetch(`${newUrl}/api/maintenance/logs`, {
+    fetch(`${url}/api/maintenance/logs`, {
       headers: {
         Authorization: 'Basic ' + window.btoa(`${apiUsername}:${apiPassword}`),
       },
@@ -608,7 +608,7 @@ const Maintenance = () => {
     // setNClosed(0)
 
     fetch(
-      `${newUrl}/api/maintenance?limit=9&page=${jobCardsPage}&status=${status}&search=${search}&startDate=${startDate}&endDate=${endDate}`,
+      `${url}/api/maintenance?limit=9&page=${jobCardsPage}&status=${status}&search=${search}&startDate=${startDate}&endDate=${endDate}`,
       {
         headers: {
           Authorization:
@@ -805,7 +805,7 @@ const Maintenance = () => {
       // console.log(currentMileages, mileages)
       alert('Invalid Index')
     } else {
-      fetch(`${newUrl}/api/maintenance`, {
+      fetch(`${url}/api/maintenance`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -832,7 +832,7 @@ const Maintenance = () => {
             .then((res) => {})
             .catch((err) => toast.error('Error Occured!'))
 
-          fetch(`${newUrl}/equipments/${res.plate.key}`, {
+          fetch(`${url}/equipments/${res.plate.key}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -867,7 +867,7 @@ const Maintenance = () => {
     if (parseInt(mileages) < currentMileages && !startIndexNotApplicable) {
       setLoading(false)
     } else {
-      fetch(`${newUrl}/api/maintenance/logs`, {
+      fetch(`${url}/api/maintenance/logs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -972,7 +972,7 @@ const Maintenance = () => {
     }
     console.log(payload)
 
-    fetch(`${newUrl}/api/maintenance/${row._id}`, {
+    fetch(`${url}/api/maintenance/${row._id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -1134,7 +1134,7 @@ const Maintenance = () => {
     }
 
     fetch(
-      `${newUrl}/api/maintenance/logs/${row.jobCard_Id || row.jobCard_id}`,
+      `${url}/api/maintenance/logs/${row.jobCard_Id || row.jobCard_id}`,
       {
         method: 'PUT',
         headers: {

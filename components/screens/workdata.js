@@ -306,6 +306,7 @@ export default function Workdata() {
       .then((resp) => {
         setLoadingEquipments(false)
         let list = resp
+        console.log('@@@list: ', list);
         // ?.filter((r) => r.eqDescription !== 'LOWBED')
         let listLowbeds = resp?.filter((r) => r.eqDescription === 'LOWBED')
 
