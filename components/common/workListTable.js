@@ -175,7 +175,7 @@ export default function WorkListTable({
   handlePageChange,
   dataCount,
   pageNumber,
-  handleEdit
+  handleEdit,
 }) {
   const [pageSize, setPageSize] = useState(15)
   const { user, setUser } = useContext(UserContext)
@@ -420,14 +420,14 @@ export default function WorkListTable({
                           row.status === 'approved' ||
                           row.status === 'rejected'
                             ? row?.equipment?.uom === 'hour'
-                              ? _.round(row?.duration / (1000 * 60 * 60), 2) +
+                              ? Math.round((row?.duration / 3600000) * 10) /
+                                  10 +
                                 'h'
                               : Math.round(row?.duration * 100) / 100 + 'd'
                             : '...'
                         }
                       />
                     </Table.Cell>
-                    
 
                     {canViewRenues && (
                       <Table.Cell>
