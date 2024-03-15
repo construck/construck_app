@@ -184,7 +184,7 @@ const getTotalDuration = (dailyWork, uom) => {
 
   if (duration)
     return uom === 'hour'
-      ? _.round(duration) + 'h'
+      ? duration + 'h'
       : Math.round(duration * 100) / 100 + 'd'
 }
 
@@ -369,7 +369,7 @@ export default function WorkListTable({
                   <Table.Row key={row._id}>
                     <Table.Cell singleLine>
                       <div
-                        className="flex flex-row space-x-1 cursor-pointer hover:underline"
+                        className="flex cursor-pointer flex-row space-x-1 hover:underline"
                         onClick={() => {
                           handleOpenDrawer(true)
                           handleViewRow(row._id)
