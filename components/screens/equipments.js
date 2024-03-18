@@ -372,90 +372,9 @@ export default function Equipments() {
     } else setStatusFilter(filterBy)
   }, [filterBy])
 
-  function sendToWorkShop() {
-    // let _eqs = [...equipments]
-    // let indexToUpdate = 0
-    // let eqToUpdate = _eqs.find((e, index) => {
-    //   indexToUpdate = index
-    //   return e._id == rowId
-    // })
-    // eqToUpdate.eqStatus = 'updating'
-    // _eqs[indexToUpdate] = eqToUpdate
-    // setEquipments(_eqs)
-    // fetch(`${url}/equipments/sendToWorkshop/${rowId}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Basic ' + window.btoa(`${apiUsername}:${apiPassword}`),
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     let _eqs = [...equipments]
-    //     let indexToUpdate = 0
-    //     let eqToUpdate = _eqs.find((e, index) => {
-    //       indexToUpdate = index
-    //       return e._id == rowId
-    //     })
-    //     eqToUpdate.eqStatus = 'workshop'
-    //     _eqs[indexToUpdate] = eqToUpdate
-    //     setEquipments(_eqs)
-    //     // setOgEquipmentList(_eqs)
-    //     let availableEq = equipments.filter((e) => e.eqStatus === 'standby')
-    //     let assignedEq = equipments.filter((e) => e.eqStatus === 'dispatched')
-    //     let dispatchedEq = equipments.filter((e) => e.eqStatus === 'dispatched')
-    //     let inWorkshopEq = equipments.filter((e) => e.eqStatus === 'workshop')
-    //     let disposed = equipments.filter((e) => e.eqStatus === 'disposed')
-    //     setNAssigned(assignedEq.length)
-    //     setNAvailable(availableEq.length)
-    //     setNDispatched(dispatchedEq.length)
-    //     setNInWorkshop(inWorkshopEq.length)
-    //     setNDisposed(disposed.length)
-    //   })
-    //   .catch((err) => {})
-  }
+  function sendToWorkShop() {}
 
-  function makeAvailable() {
-    // let _eqs = [...equipments]
-    // let indexToUpdate = 0
-    // let eqToUpdate = _eqs.find((e, index) => {
-    //   indexToUpdate = index
-    //   return e._id == rowId
-    // })
-    // eqToUpdate.eqStatus = 'updating'
-    // _eqs[indexToUpdate] = eqToUpdate
-    // setEquipments(_eqs)
-    // fetch(`${url}/equipments/makeAvailable/${rowId}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Basic ' + window.btoa(`${apiUsername}:${apiPassword}`),
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     let _eqs = [...equipments]
-    //     let indexToUpdate = 0
-    //     let eqToUpdate = _eqs.find((e, index) => {
-    //       indexToUpdate = index
-    //       return e._id == rowId
-    //     })
-    //     eqToUpdate.eqStatus = 'standby'
-    //     _eqs[indexToUpdate] = eqToUpdate
-    //     setEquipments(_eqs)
-    //     // setOgEquipmentList(_eqs)
-    //     let availableEq = equipments.filter((e) => e.eqStatus === 'standby')
-    //     let assignedEq = equipments.filter((e) => e.eqStatus === 'dispatched')
-    //     let dispatchedEq = equipments.filter((e) => e.eqStatus === 'dispatched')
-    //     let inWorkshopEq = equipments.filter((e) => e.eqStatus === 'workshop')
-    //     let disposed = equipments.filter((e) => e.eqStatus === 'disposed')
-    //     setNAssigned(assignedEq.length)
-    //     setNAvailable(availableEq.length)
-    //     setNDispatched(dispatchedEq.length)
-    //     setNInWorkshop(inWorkshopEq.length)
-    //     setNDisposed(disposed.length)
-    //   })
-  }
+  function makeAvailable() {}
 
   function disposeEquipment() {
     let _eqs = [...equipments]
@@ -689,13 +608,17 @@ export default function Equipments() {
         />
       )}
       <div className="my-5 flex flex-col space-y-5 px-10">
-        <div className="text-2xl font-semibold">Equipment</div>
+        <div className="flex h-12 items-start justify-end">
+          <h2 className="flex-1">
+            <span>Equipments</span>
+          </h2>
+        </div>
         <div className="flex w-full flex-row items-center justify-between space-x-4">
           {viewPort === 'list' && canCreateData && (
             <MSubmitButton
               submit={() => setViewPort('new')}
               intent="primary"
-              icon={<PlusIcon className="h-5 w-5 text-zinc-800" />}
+              icon={<PlusIcon className="text-zinc-800 h-5 w-5" />}
               label="New"
             />
           )}
@@ -713,7 +636,7 @@ export default function Equipments() {
                 refresh()
               }}
               intent="primary"
-              icon={<ArrowLeftIcon className="h-5 w-5 text-zinc-800" />}
+              icon={<ArrowLeftIcon className="text-zinc-800 h-5 w-5" />}
               label="Back"
             />
           )}
@@ -806,116 +729,6 @@ export default function Equipments() {
                 }
               />
 
-              {/* Available */}
-              {/* <div
-                className={
-                  filterBy === 'available'
-                    ? 'cursor-pointer rounded-lg p-1 font-normal'
-                    : 'cursor-pointer rounded-lg p-1 font-normal'
-                }
-                onClick={() =>
-                  filterBy === 'available'
-                    ? setFilterBy('all')
-                    : setFilterBy('available')
-                }
-              >
-                <Tooltip title="Available">
-                  <div
-                    className={
-                      filterBy !== 'standby'
-                        ? 'flex flex-row items-center rounded-lg p-1 text-green-400 shadow-md ring-1 ring-green-100'
-                        : 'flex flex-row items-center rounded-lg bg-green-50 p-1 text-green-600 ring-1 ring-green-400'
-                    }
-                  >
-                    <CheckIcon className="h-5 w-5" />
-                    <div>({nAvailable})</div>
-                  </div>
-                </Tooltip>
-              </div> */}
-
-              {/* Dispatched */}
-              {/* <div
-                className={
-                  filterBy === 'dispatched'
-                    ? 'cursor-pointer rounded-lg p-1 font-normal'
-                    : 'cursor-pointer rounded-lg p-1 font-normal'
-                }
-                onClick={() =>
-                  filterBy === 'dispatched'
-                    ? setFilterBy('all')
-                    : setFilterBy('dispatched')
-                }
-              >
-                <Tooltip title="Dispatched">
-                  <div
-                    className={
-                      filterBy !== 'dispatched'
-                        ? 'flex flex-row items-center rounded-lg p-1 text-zinc-500 shadow-md ring-1 ring-zinc-100'
-                        : 'flex flex-row items-center rounded-lg bg-zinc-100 p-1 text-zinc-600 ring-1 ring-zinc-300'
-                    }
-                  >
-                    <ExclamationTriangleIcon className="h-5 w-5" />
-                    <div>({nDispatched})</div>
-                  </div>
-                </Tooltip>
-              </div> */}
-
-              {/* Standby */}
-              {/* <div
-                className={
-                  filterBy === 'standby'
-                    ? 'cursor-pointer rounded-lg p-1 font-normal'
-                    : 'cursor-pointer rounded-lg p-1 font-normal'
-                }
-                onClick={() =>
-                  filterBy === 'standby'
-                    ? setFilterBy('all')
-                    : setFilterBy('standby')
-                }
-              >
-                <Tooltip title="Stand by">
-                  <div
-                    className={
-                      filterBy !== 'standby'
-                        ? 'flex flex-row items-center rounded-lg p-1 text-orange-300 shadow-md ring-1 ring-orange-100'
-                        : 'flex flex-row items-center rounded-lg bg-orange-50 p-1 text-orange-400 ring-1 ring-orange-300'
-                    }
-                  >
-                    <LockClosedIcon className="h-5 w-5" />
-                    <div>({nStandby})</div>
-                  </div>
-                </Tooltip>
-              </div> */}
-
-              {/* Workshop */}
-              {/* <div
-                className={
-                  filterBy === 'workshop'
-                    ? 'cursor-pointer rounded-lg p-1 font-normal'
-                    : 'cursor-pointer rounded-lg p-1 font-normal'
-                }
-                onClick={() =>
-                  filterBy === 'workshop'
-                    ? setFilterBy('all')
-                    : setFilterBy('workshop')
-                }
-              >
-                <Tooltip title="In workshop">
-                  <div
-                    className={
-                      filterBy !== 'workshop'
-                        ? 'flex flex-row items-center rounded-lg p-1 text-red-300 shadow-md ring-1 ring-red-100'
-                        : 'flex flex-row items-center rounded-lg bg-red-50 p-1 text-red-400 ring-1 ring-red-300'
-                    }
-                  >
-                    <CogIcon className="h-5 w-5" />
-                    <div>({nInWorkshop})</div>
-                  </div>
-                </Tooltip>
-              </div> */}
-
-              {/* <AdjustmentsIcon className="h-5 w-5 cursor-pointer text-red-500" /> */}
-
               {canCreateData && (
                 <div>
                   <label>
@@ -949,7 +762,7 @@ export default function Equipments() {
               <MSubmitButton
                 submit={refresh}
                 intent="neutral"
-                icon={<ArrowPathIcon className="h-5 w-5 text-zinc-800" />}
+                icon={<ArrowPathIcon className="text-zinc-800 h-5 w-5" />}
                 label="Refresh"
               />
             </div>

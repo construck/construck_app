@@ -184,48 +184,6 @@ export default function Dashboard() {
         setEquipmentOptions(options)
       })
       .catch((err) => {})
-
-    // fetch(`${url}/downtimes/trucks`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Basic ' + window.btoa(`${apiUsername}:${apiPassword}`),
-    //   },
-    //   body: JSON.stringify({
-    //     startDate: startDate
-    //       ? startDate
-    //       : Date.today().clearTime().moveToFirstDayOfMonth(),
-    //     endDate: endDate ? endDate : Date.today(),
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log(res)
-    //     setLoadingAverageDownTimeTrucks(false)
-    //     setAverageDowntimeTrucks(_.round(res[0].downtime, 2).toLocaleString())
-    //   })
-    //   .catch((err) => toast.error('Error Occured!'))
-
-    // fetch(`${url}/downtimes/machines`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Basic ' + window.btoa(`${apiUsername}:${apiPassword}`),
-    //   },
-    //   body: JSON.stringify({
-    //     startDate: startDate
-    //       ? startDate
-    //       : Date.today().clearTime().moveToFirstDayOfMonth(),
-    //     endDate: endDate ? endDate : Date.today(),
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log(res)
-    //     setLoadingAverageDownTimeMachines(false)
-    //     setAverageDowntimeMachines(_.round(res[0].downtime, 2).toLocaleString())
-    //   })
-    //   .catch((err) => toast.error('Error Occured!'))
   }, [])
 
   //Date range changed
@@ -292,48 +250,6 @@ export default function Dashboard() {
         setAssetUtilization(res?.assetUtilization)
       })
       .catch((err) => toast.error('Error Occured!'))
-
-    // fetch(`${url}/downtimes/trucks`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Basic ' + window.btoa(`${apiUsername}:${apiPassword}`),
-    //   },
-    //   body: JSON.stringify({
-    //     startDate: startDate
-    //       ? startDate
-    //       : Date.today().clearTime().moveToFirstDayOfMonth(),
-    //     endDate: endDate ? endDate : Date.today(),
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log(res)
-    //     setLoadingAverageDownTimeTrucks(false)
-    //     setAverageDowntimeTrucks(_.round(res[0].downtime, 2).toLocaleString())
-    //   })
-    //   .catch((err) => toast.error('Error Occured!'))
-
-    // fetch(`${url}/downtimes/machines`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Authorization: 'Basic ' + window.btoa(`${apiUsername}:${apiPassword}`),
-    //   },
-    //   body: JSON.stringify({
-    //     startDate: startDate
-    //       ? startDate
-    //       : Date.today().clearTime().moveToFirstDayOfMonth(),
-    //     endDate: endDate ? endDate : Date.today(),
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) => {
-    //     console.log(res)
-    //     setLoadingAverageDownTimeMachines(false)
-    //     setAverageDowntimeMachines(_.round(res[0].downtime, 2).toLocaleString())
-    //   })
-    //   .catch((err) => toast.error('Error Occured!'))
 
     fetch(`${url}/downtimes`, {
       method: 'GET',
@@ -629,11 +545,10 @@ export default function Dashboard() {
 
   return (
     <div className="my-5 flex flex-col space-y-5 px-10">
-      <div className="text-2xl font-semibold">
-        Dashboard{' '}
-        {/* <a className='text-sm' href="itms-services://?action=download-manifest&url=https://shapeherd.rw/shabikaapp/manifest.plist">
-          Install iOS App
-        </a> */}
+      <div className="flex h-12 items-start justify-end">
+        <h2 className="flex-1">
+          <span>Dashboard</span>
+        </h2>
       </div>
 
       <div className="mb-5 flex flex-row space-x-5 py-5">
@@ -736,7 +651,7 @@ export default function Dashboard() {
                 provisionalRevenues?.toLocaleString() + ' RWF'
               ),
             }}
-            icon={<BanknotesIcon className="h-5 w-5 text-yellow-600" />}
+            icon={<BanknotesIcon className="text-yellow-600 h-5 w-5" />}
           />
           <StatisticCard
             data={{
@@ -770,7 +685,7 @@ export default function Dashboard() {
                 assetAvailability + '%'
               ),
             }}
-            icon={<TruckIcon className="h-5 w-5 text-yellow-500" />}
+            icon={<TruckIcon className="text-yellow-500 h-5 w-5" />}
           />
         </div>
       </div>

@@ -22,7 +22,6 @@ import {
   StopIcon,
 } from '@heroicons/react/24/outline'
 import { CheckIcon, XMarkIcon } from '@heroicons/react/24/solid'
-import CheckableTag from 'antd/lib/tag/CheckableTag'
 import MSmallSubmitButton from './mSmallSubmitButton'
 import { UserContext } from '../../contexts/UserContext'
 

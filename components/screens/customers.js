@@ -206,13 +206,17 @@ export default function Customers() {
 
   return (
     <div className="my-5 flex flex-col space-y-5 px-10">
-      <div className="text-2xl font-semibold">Customers</div>
+      <div className="flex h-12 items-start justify-end">
+        <h2 className="flex-1">
+          <span>Customers</span>
+        </h2>
+      </div>
       <div className="flex w-full flex-row items-center justify-between space-x-4">
         {viewPort === 'list' && canCreateData && (
           <MSubmitButton
             submit={() => setViewPort('new')}
             intent="primary"
-            icon={<PlusIcon className="h-5 w-5 text-zinc-800" />}
+            icon={<PlusIcon className="text-zinc-800 h-5 w-5" />}
             label="New"
           />
         )}
@@ -230,7 +234,7 @@ export default function Customers() {
               loadCustomers()
             }}
             intent="primary"
-            icon={<ArrowLeftIcon className="h-5 w-5 text-zinc-800" />}
+            icon={<ArrowLeftIcon className="text-zinc-800 h-5 w-5" />}
             label="Back"
           />
         )}
@@ -250,7 +254,7 @@ export default function Customers() {
             <MSubmitButton
               submit={loadCustomers}
               intent="neutral"
-              icon={<ArrowPathIcon className="h-5 w-5 text-zinc-800" />}
+              icon={<ArrowPathIcon className="text-zinc-800 h-5 w-5" />}
               label="Refresh"
             />
           </>

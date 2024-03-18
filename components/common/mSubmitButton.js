@@ -7,23 +7,23 @@ export default function MSubmitButton({
   icon,
   intent = '',
   disabled = false,
-  intentColor
+  intentColor,
 }) {
   function getClassByIntent(intent) {
     if (intent === 'primary') {
-      return 'flex items-center justify-center space-x-1 bg-white rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-primary hover:bg-primary/60  text-dark rounded border border-primary cursor-pointer px-3 py-2'
     } else if (intent === 'warning') {
-      return 'flex items-center justify-center space-x-1 bg-yellow-200 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-yellow-200 rounded  cursor-pointer px-3 py-2'
     } else if (intent === 'danger') {
-      return 'flex items-center justify-center space-x-1 bg-red-200 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-red-200 rounded  cursor-pointer px-3 py-2'
     } else if (intent === 'neutral') {
-      return 'flex items-center justify-center space-x-1 bg-gray-50 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-gray-50 rounded  cursor-pointer px-3 py-2'
     } else if (intent === 'success') {
-      return 'flex items-center justify-center space-x-1 bg-green-100 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-gray-100 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-green-100 rounded  cursor-pointer px-3 py-2'
     } else if (intent === 'disabled') {
-      return 'flex items-center justify-center space-x-1 bg-gray-100 rounded  ring-1 ring-zinc-300 shadow-sm cursor-not-allowed px-3 py-2 w-20 text-zinc-800'
+      return 'flex items-center justify-center space-x-1 bg-gray-100 rounded  cursor-not-allowed px-3 py-2 w-20'
     } else {
-      return 'flex items-center justify-center space-x-1 bg-blue-400 rounded  ring-1 ring-zinc-300 shadow-sm cursor-pointer px-3 py-2  active:scale-95 hover:bg-blue-500 text-white'
+      return 'flex items-center justify-center space-x-1 bg-secondary hover:bg-secondary/60 text-dark rounded  cursor-pointer px-3 py-2'
     }
   }
   return (
@@ -32,7 +32,17 @@ export default function MSubmitButton({
       className={getClassByIntent(intent)}
     >
       {icon}
-      <div className={`font-bold ${(intentColor) && intentColor == 'danger' ? 'text-red-400' : intentColor == 'success' ? 'text-green-400' :'' }`}>{label}</div>
+      <div
+        className={`text-sm font-bold ${
+          intentColor && intentColor == 'danger'
+            ? 'text-red-400'
+            : intentColor == 'success'
+            ? 'text-green-400'
+            : ''
+        }`}
+      >
+        {label}
+      </div>
     </button>
   )
 }

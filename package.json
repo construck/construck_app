@@ -11,6 +11,7 @@
     "@nivo/line": "^0.79.1",
     "@uiw/react-watermark": "0.0.5",
     "antd": "^4.20.1",
+    "caniuse-lite": "^1.0.30001597",
     "datejs": "^1.0.0-rc3",
     "dayjs": "^1.11.7",
     "feather-icons-react": "^0.5.0",

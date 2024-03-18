@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { ScreenContext } from '../../contexts/ScreenContext'
-import WorkData from '../screens/workdata'
+import WorkData from '../screens/dispatches'
 import Settings from '../screens/settings'
 import Dashboard from '../screens/dashboard'
 import Customers from '../screens/customers'
@@ -15,6 +15,7 @@ import Maintenance from '../screens/maintenance';
 import Items from '../screens/items';
 import Mechanics from '../screens/mechanics';
 import Mechanical from '../screens/mechanicals';
+import DispatchReport from '../screens/dispatches/report';
 
 export default function Main() {
   let { screen, setScreen } = useContext(ScreenContext)
@@ -36,6 +37,7 @@ export default function Main() {
       {(screen === 'workshop' || screen === 'items') && <Items />}
       {screen === 'mechanics' && <Mechanics />}
       {screen === 'mechanical' && <Mechanical />}
+      {screen === 'dispatchReports' && <DispatchReport />}
     </div>
   )
 }

@@ -5,8 +5,8 @@ export default function MTextView({ content, selected }) {
     <div
       className={
         !selected
-          ? 'flex text-sm font-normal text-gray-500'
-          : 'flex rounded bg-gray-500 px-1 text-sm font-normal text-gray-100 transition duration-150 ease-in-out'
+          ? 'flex text-sm font-normal '
+          : 'flex rounded bg-gray-500 px-1 text-sm font-normal transition duration-150 ease-in-out'
       }
     >
       {content}
