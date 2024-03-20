@@ -5,7 +5,7 @@ import {
   ArrowPathIcon,
 } from '@heroicons/react/24/outline'
 import React, { useContext, useEffect, useState } from 'react'
-import { Dropdown, Loader } from 'semantic-ui-react'
+import { Dropdown, Loader, Checkbox } from 'semantic-ui-react'
 import MSubmitButton from '../common/mSubmitButton'
 import UsersTable from '../common/usersTable'
 import ProjectCard from '../common/projectCard'
@@ -19,6 +19,7 @@ import * as FileSaver from 'file-saver'
 import * as XLSX from 'xlsx'
 
 import moment from 'moment'
+import MTitle from '../common/mTitle'
 
 export default function Users() {
   let url = process.env.NEXT_PUBLIC_BKEND_URL
@@ -36,6 +37,7 @@ export default function Users() {
   let [phone, setPhone] = useState('')
   let [email, setEmail] = useState('')
   let [role, setRole] = useState('display')
+  let [userPermissions, setUserPermissions] = useState({})
   let [userCompany, setUserCompany] = useState(null)
   let [loadingProjects, setLoadingProjects] = useState(false)
   let [projectList, setProjectList] = useState([])
@@ -66,10 +68,18 @@ export default function Users() {
         { key: '5', value: 'dispatch', text: 'Dispatch officer' },
         { key: '6', value: 'dispatch-view', text: 'Display Dispatch' },
         { key: '10', value: 'workshop-manager', text: 'Workshop manager' },
-        { key: '11', value: 'workshop-supervisor', text: 'Workshop supervisor' },
+        {
+          key: '11',
+          value: 'workshop-supervisor',
+          text: 'Workshop supervisor',
+        },
         { key: '15', value: 'workshop-support', text: 'Workshop support' },
         { key: '12', value: 'recording-officer', text: 'Recording officer' },
-        { key: '13', value: 'workshop-team-leader', text: 'Workshop team leader' },
+        {
+          key: '13',
+          value: 'workshop-team-leader',
+          text: 'Workshop team leader',
+        },
         { key: '8', value: 'customer-admin', text: 'Customer Admin' },
         {
           key: '9',
@@ -233,6 +243,7 @@ export default function Users() {
           ? projectAssigned
           : user.assignedProjects,
         status: 'active',
+        permissions: userPermissions,
       }),
     })
       .then((res) => res.json())
@@ -257,12 +268,13 @@ export default function Users() {
     //ToDO
 
     setViewPort('change')
-    setIdToUpdate(data._id)
-    setFirstName(data.firstName)
-    setLastName(data.lastName)
-    setPhone(data.phone)
-    setEmail(data.email)
-    setRole(data.userType)
+    setIdToUpdate(data?._id)
+    setFirstName(data?.firstName)
+    setLastName(data?.lastName)
+    setPhone(data?.phone)
+    setEmail(data?.email)
+    setRole(data?.userType)
+    setUserPermissions(data?.permissions)
   }
 
   function updateUser() {
@@ -284,6 +296,7 @@ export default function Users() {
         assignedProjects: projectAssigned
           ? projectAssigned
           : user.assignedProject,
+        permissions: userPermissions,
       }),
     })
       .then((res) => res.json())
@@ -352,6 +365,41 @@ export default function Users() {
     //   _siteWorkDetails,
     //   `Detailed Site works ${moment().format('DD-MMM-YYYY HH-mm-ss')}`
     // )
+  }
+
+  function buildAdditionalPermissions() {
+    let permissions = [
+      { name: 'canCreateData', label: 'Can Create Data' },
+      { name: 'canMoveAssets', label: 'Can Move Assets' },
+      { name: 'canDispatch', label: 'Can Create Dispatch' },
+      { name: 'canStartAndStopJob', label: 'Can Start and Stop Dispatches' },
+      { name: 'canViewRevenues', label: 'Can View Revenues' },
+      { name: 'canViewDashboards', label: 'Can View Dashboards' },
+      { name: 'canViewUsers', label: 'Can View Users' },
+      { name: 'canViewDrivers', label: 'Can View Drivers' },
+      { name: 'canViewVendors', label: 'Can View Vendors' },
+      { name: 'canViewSettings', label: 'Can View Settings' },
+      { name: 'canDownloadDispatches', label: 'Can Download Dispatches' },
+    ]
+    return (
+      <div className="flex flex-col space-y-3">
+        <MTitle content={'Additional Permissions'} />
+        {permissions?.map((per) => {
+          return (
+            <Checkbox
+              toggle
+              label={per?.label}
+              checked={userPermissions[`${per?.name}`]}
+              onChange={(e, data) => {
+                let _userPermissions = { ...userPermissions }
+                _userPermissions[`${per?.name}`] = data?.checked
+                setUserPermissions(_userPermissions)
+              }}
+            />
+          )
+        })}
+      </div>
+    )
   }
 
   return (
@@ -425,6 +473,7 @@ export default function Users() {
           )}
         </>
       )}
+
       {viewPort === 'new' && (
         <>
           <div className="flex flex-col space-y-5">
@@ -487,7 +536,6 @@ export default function Users() {
                     placeholder="Role"
                     fluid
                     search
-                    
                     selection
                     onChange={(e, data) => {
                       setRole(data.value)
@@ -496,7 +544,9 @@ export default function Users() {
                 </div>
               </div>
 
-              {(role == 'customer-project-manager' || role === 'admin' || role == 'customer-site-manager') && (
+              {(role == 'customer-project-manager' ||
+                role === 'admin' ||
+                role == 'customer-site-manager') && (
                 <div className="flex flex-col items-start space-y-1">
                   <div className="flex flex-row items-center">
                     <MTextView content="Assign to Project" />
@@ -551,6 +601,7 @@ export default function Users() {
                 </div>
               )}
             </div>
+            {buildAdditionalPermissions()}
             {firstName.length >= 1 &&
               phone.length === 10 &&
               email.length > 0 && (
@@ -698,6 +749,7 @@ export default function Users() {
                 </div>
               )}
             </div>
+            {buildAdditionalPermissions()}
             {firstName.length >= 1 &&
               phone.length === 10 &&
               email.length > 0 && (
