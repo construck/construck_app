@@ -13,7 +13,7 @@ const Items = () => {
   let { user } = useContext(UserContext)
 
   let role = user?.userType
-  let canCreateData = role === 'workshop-support';
+  let canCreateData = user?.permissions?.canCreateData
   
   let [pageNumber, setPageNumber] = useState(1);
   const [items, setItems] = useState([]);

@@ -27,7 +27,7 @@ import ModalRelease from '../common/projectModalReleased'
 export default function Projects() {
   let { user, setUser } = useContext(UserContext)
   //AUTORIZATION
-  let canCreateData = user.userType === 'admin'
+  let canCreateData = user?.permissions?.canCreateData
 
   let [projects, setProjects] = useState([])
   let [ogProjectList, setOgProjectList] = useState([])

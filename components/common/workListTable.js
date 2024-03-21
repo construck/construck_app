@@ -214,12 +214,9 @@ export default function WorkListTable({
   console.log('Data ', data)
 
   //Authorization
-  let canDispatch = user.userType === 'dispatch' || user.userType === 'admin'
-  let canStartAndStopJob =
-    user.userType === 'revenue' ||
-    user.userType === 'admin' ||
-    user.userType === 'vendor'
-  let canViewRenues = user.userType === 'revenue' || user.userType == 'admin'
+  let canDispatch = user?.permissions?.canDispatch
+  let canStartAndStopJob = user?.permissions?.canStartAndStopJob
+  let canViewRenues = user?.permissions?.canViewRenues
   let isVendor = user.userType === 'vendor'
 
   if (!data) data = []
@@ -369,7 +366,7 @@ export default function WorkListTable({
                   <Table.Row key={row._id}>
                     <Table.Cell singleLine>
                       <div
-                        className="flex flex-row space-x-1 cursor-pointer hover:underline"
+                        className="flex cursor-pointer flex-row space-x-1 hover:underline"
                         onClick={() => {
                           handleOpenDrawer(true)
                           handleViewRow(row._id)

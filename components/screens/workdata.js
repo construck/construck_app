@@ -33,21 +33,10 @@ const { RangePicker } = DatePicker
 export default function Workdata() {
   let { user, setUser } = useContext(UserContext)
   //AUTORIZATION
-  let canDispatch = user.userType === 'dispatch' || user.userType === 'admin'
-  let canStartAndStopJob =
-    user.userType === 'revenue' || user.userType === 'admin'
-  let canViewRenues =
-    user.userType === 'revenue' ||
-    user.userType === 'admin' ||
-    user.userType === 'revenue-admin'
-
-  let canDownloadDispatches =
-    user.userType === 'revenue' ||
-    user.userType === 'admin' ||
-    user.userType === 'revenue-admin' ||
-    user.userType === 'dispatch' ||
-    user.userType === 'customer-site-manager' ||
-    user.userType === 'customer-project-manager'
+  let canDispatch = user?.permissions?.canDispatch
+  let canStartAndStopJob = user?.permissions?.canStartAndStopJob
+  let canViewRenues = user?.permissions?.canViewRenues
+  let canDownloadDispatches = user?.permissions?.canDownloadDispatches
   let isVendor = user.userType === 'vendor'
 
   let [dataSize, setDataSize] = useState(0)
