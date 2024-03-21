@@ -28,7 +28,7 @@ import Repair from '../stages/repair'
 import Testing from '../stages/testing'
 import GatePass from '../stages/gatePass'
 import MainStatusCard from '../common/mainStatusCard'
-import { Modal, Button, Dropdown, Popconfirm } from 'antd'
+import { Modal, Button, Dropdown, Popconfirm, DatePicker, Descriptions } from 'antd'
 import moment from 'moment'
 import MTextView from '../common/mTextView'
 import PrintableItems from '../stages/printableItems'
@@ -39,7 +39,6 @@ import { Pagination } from 'semantic-ui-react'
 import MPagination from '../common/pagination'
 import * as _ from 'lodash'
 import { Loader } from 'semantic-ui-react'
-import { DatePicker, Descriptions } from 'antd'
 
 const { RangePicker } = DatePicker
 const Maintenance = () => {

@@ -15,21 +15,15 @@ export default function Menu({
   const tabs = [
     {
       name: 'All',
-      screen: 'workData',
+      screen: 'equipments',
       count: allCount,
-      current: current === 'All' ? true : false,
-    },
-    {
-      name: 'Reversals',
-      screen: 'reversals',
-      count: reversalsCount,
-      current: current === 'reversals' ? true : false,
+      current: current === 'equipments' ? true : false,
     },
     {
       name: 'Reports',
-      screen: 'dispatchReports',
+      screen: 'equipmentReports',
       count: reportsCount,
-      current: current === 'dispatchReports' ? true : false,
+      current: current === 'equipmentReports' ? true : false,
     },
   ]
   return (

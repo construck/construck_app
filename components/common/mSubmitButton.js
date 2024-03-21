@@ -21,9 +21,9 @@ export default function MSubmitButton({
     } else if (intent === 'success') {
       return 'flex items-center justify-center space-x-1 bg-green-100 rounded  cursor-pointer px-3 py-2'
     } else if (intent === 'disabled') {
-      return 'flex items-center justify-center space-x-1 bg-gray-100 rounded  cursor-not-allowed px-3 py-2 w-20'
+      return 'flex items-center justify-center space-x-1 bg-gray-100 rounded  cursor-not-allowed px-3 py-2'
     } else {
-      return 'flex items-center justify-center space-x-1 bg-secondary hover:bg-secondary/60 text-dark rounded  cursor-pointer px-3 py-2'
+      return 'flex items-center justify-center space-x-1 bg-secondary hover:bg-secondary/60 text-black rounded  cursor-pointer px-3 py-2'
     }
   }
   return (

@@ -17,10 +17,8 @@ import TextInputV from '../../common/TextIputV'
 import 'datejs'
 import moment from 'moment'
 import {
-  AdjustmentsHorizontalIcon,
   MagnifyingGlassIcon,
   ArrowDownTrayIcon,
-  ArrowLeftIcon,
   ArrowPathIcon,
   CheckIcon,
   DocumentDuplicateIcon,
@@ -264,17 +262,6 @@ export default function Workdata() {
             text: l.firstName + ' ' + l.lastName,
           }
         })
-        // userOptions.push({
-        //   key: 'NA',
-        //   value: 'NA',
-        //   text: 'Not applicable',
-        // })
-        // if (viewPort === 'edit')
-        // userOptions?.push({
-        //   key: row?.driver?._id,
-        //   value: row?.driver?._id,
-        //   text: row?.driver?.firstName + ' ' + row?.driver?.lastName,
-        // })
         setDriverList(userOptions)
         seLowBedDriverList(userOptions)
         let _drLists = [userOptions]
@@ -1554,12 +1541,10 @@ export default function Workdata() {
   }
 
   async function update() {
-    console.log(selEquipments.length, drivers)
     if (eqType === 'Truck' && (targetTrips == 0 || !targetTrips)) {
       toast.error('Target trips are mandatory for this entry!')
     } else {
       if (selEquipments.length <= drivers.length) {
-        console.log('here')
         setSubmitting(true)
         let posted = 0
         let promises = []
@@ -1739,7 +1724,6 @@ export default function Workdata() {
           })
         } else {
           await Promise.all(promises).then(() => {
-            console.log('Doooone')
             setSubmitting(false)
             refresh()
             setViewPort('list')
@@ -2259,7 +2243,6 @@ export default function Workdata() {
                   />
                 )
               )}
-              <DocumentDuplicateIcon className="h-5 w-5 cursor-pointer" />
 
               <MSubmitButton
                 submit={refresh}
@@ -2269,8 +2252,6 @@ export default function Workdata() {
             </div>
           )}
         </div>
-
-        {console.log('Worklist ', workList)}
 
         {viewPort === 'list' && (
           <div className="overflow-x-auto">

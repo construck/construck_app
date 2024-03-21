@@ -7,7 +7,7 @@ import Customers from '../screens/customers'
 import Equipments from '../screens/equipments'
 import Projects from '../screens/projects'
 import Users from '../screens/users'
-import Reversals from '../screens/reversals'
+import Reversals from '../screens/dispatches/reversals'
 import Drivers from '../screens/drivers'
 import Vendors from '../screens/vendors'
 import Costs from '../screens/costs'
@@ -16,6 +16,7 @@ import Items from '../screens/items';
 import Mechanics from '../screens/mechanics';
 import Mechanical from '../screens/mechanicals';
 import DispatchReport from '../screens/dispatches/report';
+import EquipmentReport from '../screens/equipments/report';
 
 export default function Main() {
   let { screen, setScreen } = useContext(ScreenContext)
@@ -38,6 +39,7 @@ export default function Main() {
       {screen === 'mechanics' && <Mechanics />}
       {screen === 'mechanical' && <Mechanical />}
       {screen === 'dispatchReports' && <DispatchReport />}
+      {screen === 'equipmentReports' && <EquipmentReport />}
     </div>
   )
 }

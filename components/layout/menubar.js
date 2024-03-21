@@ -8,13 +8,19 @@ import {
   UsersIcon,
   QueueListIcon,
   BanknotesIcon,
+  ArrowPathIcon,
+  WrenchScrewdriverIcon,
+  ClipboardDocumentListIcon,
+  WrenchIcon,
 } from '@heroicons/react/24/outline'
+import { Accordion } from 'semantic-ui-react'
 import Image from 'next/image'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { ScreenContext } from '../../contexts/ScreenContext'
 import { UserContext } from '../../contexts/UserContext'
 import Logo from './../../assets/images/logo.svg'
 import Avatar from './../../assets/images/avatar.svg'
+import Icon from './../icons'
 
 export default function MenuBar() {
   let { screen, setScreen } = useContext(ScreenContext)
@@ -56,8 +62,18 @@ export default function MenuBar() {
   const menuClasses = () => {
     return 'flex flex-row items-center space-x-3 py-3.5 pr-2 pl-6 font-semibold cursor-pointer leading-6'
   }
+  const [activeIndex, setActiveIndex] = useState(-1) // -1 to keep none open initially
+
+  const handleItemClick = (index) => {
+    setActiveIndex(activeIndex === index ? -1 : index)
+  }
+  const items = [
+    { title: 'Item 1', content: 'Content of item 1' },
+    { title: 'Item 2', content: 'Content of item 2' },
+  ]
+
   return (
-    <div className="w-30 flex min-h-screen flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 md:w-72">
+    <div className="w-[130px] flex min-h-screen flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 md:w-[225px]">
       {/* <div className="my-5 items-center px-6 text-2xl font-bold text-zinc-800">
         Shabika App
       </div> */}
@@ -84,6 +100,9 @@ export default function MenuBar() {
                   )}
                   onClick={() => setScreen('dashboard')}
                 >
+                  {/* <span className="text-lg">
+                    <Icon name="home" />
+                  </span> */}
                   <ChartBarIcon className="h-5 w-5" />
                   <span>Dashboard</span>
                 </div>
@@ -91,7 +110,11 @@ export default function MenuBar() {
               <li>
                 <div
                   className={classNames(
-                    screen === 'workData' ? 'text-sky-700 bg-white' : null,
+                    screen === 'workData' ||
+                      screen === 'dispatchReports' ||
+                      screen === 'reversals'
+                      ? 'text-sky-700 bg-white'
+                      : null,
                     menuClasses()
                   )}
                   onClick={() => setScreen('workData')}
@@ -100,7 +123,7 @@ export default function MenuBar() {
                   <span>Dispatches</span>
                 </div>
               </li>
-              <li>
+              {/* <li>
                 <div
                   className={classNames(
                     screen === 'costs' ? 'text-sky-700 bg-white' : null,
@@ -111,7 +134,7 @@ export default function MenuBar() {
                   <BanknotesIcon className="h-5 w-5" />
                   <span>Cost</span>
                 </div>
-              </li>
+              </li> */}
               <li>
                 <div
                   className={classNames(
@@ -127,7 +150,9 @@ export default function MenuBar() {
               <li>
                 <div
                   className={classNames(
-                    screen === 'equipments' ? 'text-sky-700 bg-white' : null,
+                    screen === 'equipments' || screen === 'equipmentReports'
+                      ? 'text-sky-700 bg-white'
+                      : null,
                     menuClasses()
                   )}
                   onClick={() => setScreen('equipments')}
@@ -192,7 +217,7 @@ export default function MenuBar() {
                   )}
                   onClick={() => setScreen('maintenance')}
                 >
-                  <UserGroupIcon className="h-5 w-5" />
+                  <WrenchIcon className="h-5 w-5" />
                   <span>Maintenance</span>
                 </div>
               </li>
@@ -209,15 +234,47 @@ export default function MenuBar() {
                   )}
                   onClick={() => setScreen('workshop')}
                 >
-                  <UserGroupIcon className="h-5 w-5" />
+                  <WrenchScrewdriverIcon className="h-5 w-5" />
                   <span>Workshop</span>
                 </div>
+                <div
+                  className={classNames(
+                    screen === 'workshop' || screen === 'items'
+                      ? 'text-sky-700 bg-white'
+                      : null,
+                    menuClasses()
+                  )}
+                  hidden={
+                    screen == 'workshop' ||
+                    screen == 'items' ||
+                    screen == 'mechanics' ||
+                    screen == 'mechanical'
+                      ? false
+                      : true
+                  }
+                  onClick={() => setScreen('workshop')}
+                >
+                  <ClipboardDocumentListIcon className="h-4 w-4" />
+                  <span>Items</span>
+                </div>
               </li>
+              {/* <li>
+                <div
+                  className={classNames(
+                    screen === 'reversals' ? 'text-sky-700 bg-white' : null,
+                    menuClasses()
+                  )}
+                  onClick={() => setScreen('reversals')}
+                >
+                  <ArrowPathIcon className="h-5 w-5" />
+                  <span>Reversals</span>
+                </div>
+              </li> */}
             </ul>
           </li>
           <li className="mt-auto">
             <div className="flex space-x-3 px-5">
-              <span className="flex items-center space-x-3 flex-1">
+              <span className="flex flex-1 items-center space-x-3">
                 <Image
                   src={Avatar}
                   width={64}
@@ -230,9 +287,9 @@ export default function MenuBar() {
                   {user.firstName + ', ' + Array.from(user.lastName)[0]}
                 </span>
               </span>
-              <span className='bg-red-50 hover:bg-red-300/50 flex justify-center items-center h-9 w-9 rounded-full'>
+              <span className="flex h-9 w-9 items-center justify-center rounded-full bg-red-50 hover:bg-red-300/50">
                 <ArrowLeftOnRectangleIcon
-                  className="h-6 w-6 text-sm cursor-pointer text-red-500"
+                  className="h-6 w-6 cursor-pointer text-sm text-red-500"
                   onClick={() => logout()}
                 />
               </span>

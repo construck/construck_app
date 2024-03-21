@@ -12,19 +12,22 @@ import {
 } from '@heroicons/react/24/outline'
 import { ExclamationTriangleIcon } from '@heroicons/react/24/solid'
 import React, { useContext, useEffect, useState } from 'react'
-import EquipmentCard from '../common/equipmentCard'
-import MSubmitButton from '../common/mSubmitButton'
-import TextInput from '../common/TextIput'
+import EquipmentCard from '../../common/equipmentCard'
+import MSubmitButton from '../../common/mSubmitButton'
+import TextInput from '../../common/TextIput'
 import readXlsxFile from 'read-excel-file'
 import { Dropdown, Loader } from 'semantic-ui-react'
 import { DatePicker, Tooltip, Drawer, Skeleton } from 'antd'
-import Modal from '../common/modal'
-import { UserContext } from '../../contexts/UserContext'
-import EqStatusCard from '../common/eqStatusCard'
-import TextInputV from '../common/TextIputV'
-import TextInputLogin from '../common/TextIputLogin'
-import MTextView from '../common/mTextView'
+import Modal from '../../common/modal'
+import { UserContext } from '../../../contexts/UserContext'
+import EqStatusCard from '../../common/eqStatusCard'
+import TextInputV from '../../common/TextIputV'
+import TextInputLogin from '../../common/TextIputLogin'
+import MTextView from '../../common/mTextView'
 import { toast, ToastContainer } from 'react-toastify'
+import Menu from './menu'
+import Image from 'next/image'
+import { Header } from '@/components/atoms'
 
 import * as FileSaver from 'file-saver'
 import * as XLSX from 'xlsx'
@@ -607,21 +610,34 @@ export default function Equipments() {
           handleConfirm={disposeEquipment}
         />
       )}
-      <div className="my-5 flex flex-col space-y-5 px-10">
-        <div className="flex h-12 items-start justify-end">
+      <div className="my-5 flex flex-col space-y-3 px-10">
+        <Header title="Equipments">
+          {viewPort === 'list' && canCreateData && (
+            <div>
+              <MSubmitButton
+                submit={() => setViewPort('new')}
+                intent="primary"
+                icon={<PlusIcon className="h-5 w-5" />}
+                label="New"
+              />
+            </div>
+          )}
+        </Header>
+        <Menu current="equipments" />
+        {/* <div className="flex h-12 items-start justify-end">
           <h2 className="flex-1">
             <span>Equipments</span>
           </h2>
-        </div>
+        </div> */}
         <div className="flex w-full flex-row items-center justify-between space-x-4">
-          {viewPort === 'list' && canCreateData && (
+          {/* {viewPort === 'list' && canCreateData && (
             <MSubmitButton
               submit={() => setViewPort('new')}
               intent="primary"
               icon={<PlusIcon className="text-zinc-800 h-5 w-5" />}
               label="New"
             />
-          )}
+          )} */}
 
           {viewPort === 'list' && (
             <div className="mx-auto flex flex-grow flex-col">
