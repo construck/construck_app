@@ -36,13 +36,10 @@ export default function DispatchReport() {
         setReport(response?.report?.length === 0 ? [] : response)
         setLoading(false)
       })
-      .catch((error) => {
-        console.log('error', error)
-      })
+      .catch((error) => {})
       .finally(() => {
         setLoading(false)
       })
-    // setLoading(false)
   }
 
   const getTotal = (record) => {
@@ -54,17 +51,6 @@ export default function DispatchReport() {
       _.round((record.stopped * 100) / (record.created + record.stopped), 1) +
       '%'
     )
-  }
-  const getGlobalCreatedTotal = (records) => {
-    let total = 0
-    records.map((r) => {
-      if (_.isEmpty(r.created)) {
-        total = 0
-      } else {
-        total = total + r.created
-      }
-    })
-    return total
   }
   const getGlobalInProgressTotal = (records) => {
     let total = 0
@@ -104,6 +90,9 @@ export default function DispatchReport() {
   const handleButtonClick = () => {
     getReport(date)
   }
+  const disabledDate = (current) => {
+    return current && current.isSameOrAfter(moment())
+  }
   return (
     <div className="my-5 flex flex-col space-y-3 px-10">
       <div className="flex h-12 items-start justify-end">
@@ -119,6 +108,7 @@ export default function DispatchReport() {
             onChange={(values, dateStrings) => {
               setDate(dateStrings)
             }}
+            disabledDate={disabledDate}
             format="YYYY-MM-DD"
             placeholder="Select date"
             allowClear={true}
@@ -141,26 +131,11 @@ export default function DispatchReport() {
             </button>
           )}
         </div>
-        {/* {report && report?.report?.length > 0 && (
-          <div>
-            <MSubmitButton
-              icon={<ArrowDownTrayIcon className="text-zinc-800 h-5 w-5" />}
-              label="Download"
-            />
-          </div>
-        )} */}
       </div>
       <div>
         {!loading && report?.count === 0 && (
           <div className="flex flex-col items-center justify-center py-12">
-            <Image
-              src={Nodata}
-              width={125}
-              height={125}
-              priority
-              alt="icon"
-              // className="h-8 w-8"
-            />
+            <Image src={Nodata} width={125} height={125} priority alt="icon" />
             <h2 className="text-xl font-bold">No data found!</h2>
             <div className="text-md font-normal">
               Report on the selected date does not have any data.
