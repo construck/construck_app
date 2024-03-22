@@ -10,6 +10,10 @@ import MTextView from '../components/common/mTextView'
 import { LanguageContext } from '../contexts/languageContext'
 import { labels, messages } from '../utils/labels'
 import TextInputLogin from '../components/common/TextIputLogin'
+import Logo from '@/assets/images/logo.svg'
+import Image from 'next/image'
+import { Card } from '@/components/atoms'
+
 export default function Login() {
   const { user, setUser } = useContext(UserContext)
   const { language, setLanguage } = useContext(LanguageContext)
@@ -267,81 +271,89 @@ export default function Login() {
       {viewPort === 'login' && (
         <>
           <div className="mb-5 flex flex-row items-center space-x-5">
-            <div className="text-4xl font-bold text-zinc-800">Shabika App.</div>
+            {/* <div className="text-4xl font-bold text-zinc-800">Shabika App.</div> */}
+            <div className="mb-4 mt-5 w-full px-6">
+              <Image
+                src={Logo}
+                width={320}
+                height={96}
+                priority
+                alt="icon"
+                className="w-[220px]"
+              />
+            </div>
           </div>
-          <div className="sm:w-full md:w-1/5">
-            <form action="#">
-              <div className="flex w-full flex-col items-start justify-start space-y-3">
-                <h1 className="pb-5 text-xl text-gray-600">
-                  {`${labels[`${language}`]?.login}`}
-                </h1>
-                {/* Login form */}
-
-                <TextInputLogin
-                  label={`${labels[`${language}`]?.username}`}
-                  value={email}
-                  type="email"
-                  setValue={_setEmail}
-                />
-                <TextInputLogin
-                  label={`${labels[`${language}`]?.password}`}
-                  value={password}
-                  isPassword={true}
-                  setValue={_setPassword}
-                />
-              </div>
-              {!submitting && (
-                <button
-                  onClick={() => {
-                    if (email.length < 1 || password.length < 1) {
-                      toast.error(`${messages[`${language}`]?.checkInputs}`, {
-                        position: 'top-center',
-                        autoClose: 3000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                      })
-                    } else {
-                      login()
-                    }
-                  }}
-                  className="mt-5 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md bg-zinc-800 p-3 shadow-md transition duration-75 ease-out hover:shadow-sm active:scale-95 active:shadow-sm"
-                >
-                  {
-                    <div className="text-white">{`${
-                      labels[`${language}`]?.submit
-                    }`}</div>
-                  }
-                </button>
-              )}
-              {submitting && (
-                <div className="mt-5 flex w-full cursor-not-allowed items-center justify-center space-x-2 rounded-md bg-zinc-100 p-3 shadow-md transition duration-75 ease-out">
-                  <Loader active inline size="small" />
+          <Card size="sm" title={`${labels[`${language}`]?.login}`}>
+            <div className="w-full">
+              <form action="#">
+                <div className="flex w-full flex-col items-start justify-start space-y-3">
+                  {/* Login form */}
+                  <TextInputLogin
+                    label={`${labels[`${language}`]?.username}`}
+                    value={email}
+                    type="email"
+                    setValue={_setEmail}
+                  />
+                  <TextInputLogin
+                    label={`${labels[`${language}`]?.password}`}
+                    value={password}
+                    isPassword={true}
+                    setValue={_setPassword}
+                  />
                 </div>
-              )}
+                {!submitting && (
+                  <button
+                    onClick={() => {
+                      if (email.length < 1 || password.length < 1) {
+                        toast.error(`${messages[`${language}`]?.checkInputs}`, {
+                          position: 'top-center',
+                          autoClose: 3000,
+                          hideProgressBar: true,
+                          closeOnClick: true,
+                          pauseOnHover: true,
+                          draggable: true,
+                          progress: undefined,
+                        })
+                      } else {
+                        login()
+                      }
+                    }}
+                    className="mt-5 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md bg-primary p-3 shadow-md transition duration-75 ease-out hover:shadow-sm active:scale-95 active:shadow-sm"
+                  >
+                    {
+                      <div className="text-black">{`${
+                        labels[`${language}`]?.submit
+                      }`}</div>
+                    }
+                  </button>
+                )}
+                {submitting && (
+                  <div className="mt-5 flex w-full cursor-not-allowed items-center justify-center space-x-2 rounded-md bg-primary p-3 shadow-md transition duration-75 ease-out">
+                    <Loader active inline size="small" />
+                  </div>
+                )}
 
-              <div className="flex flex-row justify-between">
-                <button
-                  className="hover:text-blue-cvl-500 mt-10 cursor-pointer p-1 text-center text-sm text-gray-400 hover:underline"
-                  onClick={() => setViewPort('resetPassword')}
-                >
-                  Reset password
-                </button>
+                <div className="flex flex-row justify-between">
+                  <button
+                    className="hover:text-blue-cvl-500 mt-10 cursor-pointer p-1 text-center text-sm text-gray-400 hover:underline"
+                    onClick={() => setViewPort('resetPassword')}
+                  >
+                    Reset password
+                  </button>
 
-                <button
-                  className="hover:text-blue-cvl-500 mt-10 cursor-pointer p-1 text-center text-sm text-gray-400 hover:underline"
-                  onClick={
-                    () => {}
-                    // setViewPort('forgotPassword')
-                  }
-                >
-                  Forgot password
-                </button>
-              </div>
-            </form>
-          </div>
+                  <button
+                    className="hover:text-blue-cvl-500 mt-10 cursor-pointer p-1 text-center text-sm text-gray-400 hover:underline"
+                    onClick={
+                      () => {}
+                      // setViewPort('forgotPassword')
+                    }
+                  >
+                    Forgot password
+                  </button>
+                </div>
+              </form>
+            </div>
+          </Card>
 
           {/* <div className="mt-8 flex flex-row">
             <div className="mt-3 w-36 border-t-2 border-gray-200"></div>
@@ -371,7 +383,7 @@ export default function Login() {
       {viewPort === 'resetPassword' && (
         <>
           <div className="mb-5 flex flex-row items-center space-x-5">
-            <div className="text-4xl font-bold text-zinc-800">
+            <div className="text-zinc-800 text-4xl font-bold">
               Reset Password
             </div>
           </div>
@@ -426,8 +438,9 @@ export default function Login() {
                       resetPassword()
                     }
                   }}
-                  className="mt-5 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md bg-zinc-800 p-3 shadow-md transition duration-75 ease-out hover:shadow-sm active:scale-95 active:shadow-sm"
+                  className="mt-5 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md bg-primary p-3 shadow-md transition duration-75 ease-out hover:shadow-sm active:scale-95 active:shadow-sm"
                 >
+                  ===
                   {
                     <div className="text-white">{`${
                       labels[`${language}`]?.submit
@@ -436,7 +449,7 @@ export default function Login() {
                 </button>
               )}
               {submitting && (
-                <div className="mt-5 flex w-full cursor-not-allowed items-center justify-center space-x-2 rounded-md bg-zinc-100 p-3 shadow-md transition duration-75 ease-out">
+                <div className="bg-zinc-100 mt-5 flex w-full cursor-not-allowed items-center justify-center space-x-2 rounded-md p-3 shadow-md transition duration-75 ease-out">
                   <Loader active inline size="small" />
                 </div>
               )}

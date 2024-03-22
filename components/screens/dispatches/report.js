@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { Table, Segment, Loader } from 'semantic-ui-react'
-import MSubmitButton from './../../common/mSubmitButton'
 import Menu from './menu'
 import Image from 'next/image'
 import _ from 'lodash'
@@ -8,7 +7,7 @@ import moment from 'moment'
 import { DatePicker } from 'antd'
 import { ArrowRightIcon } from '@heroicons/react/24/outline'
 
-import Nodata from './../../../assets/images/no-data.png'
+import Nodata from '@/assets/images/no-data.png'
 
 let url = process.env.NEXT_PUBLIC_BKEND_URL
 let apiUsername = process.env.NEXT_PUBLIC_API_USERNAME
@@ -18,6 +17,10 @@ export default function DispatchReport() {
   const [report, setReport] = useState([])
   const [date, setDate] = useState()
   const [loading, setLoading] = useState(false)
+  const [globalTotal, setGlobalTotal] = useState(0)
+  const [globalInProgressTotal, setGlobalInProgressTotal] = useState(0)
+  const [globalCreatedTotal, setGlobalCreatedTotal] = useState(0)
+  const [globalStoppedTotal, setGlobalStoppedTotal] = useState(0)
 
   useEffect(() => {
     getReport(moment().subtract(1, 'days').format('YYYY-MM-DD'))
@@ -33,7 +36,16 @@ export default function DispatchReport() {
     })
       .then((res) => res.json())
       .then((response) => {
-        setReport(response?.report?.length === 0 ? [] : response)
+        if (response?.response?.length === 0) {
+          setReport([])
+        } else {
+          setReport(response)
+          getGlobalTotal(response?.report)
+          getGlobalInProgressTotal(response?.report)
+          getGlobalCreatedTotal(response?.report)
+          getGlobalStoppedTotal(response?.report)
+        }
+
         setLoading(false)
       })
       .catch((error) => {})
@@ -55,27 +67,39 @@ export default function DispatchReport() {
   const getGlobalInProgressTotal = (records) => {
     let total = 0
     records.map((r) => {
-      if (_.isEmpty(r.inProgress)) {
-        total = 0
-      } else {
-        total = total + r.inProgress
+      if (!_.isUndefined(r?.inProgress)) {
+        total = total + r?.inProgress
       }
+      return total
     })
-    return total
+    setGlobalInProgressTotal(total)
+  }
+  const getGlobalCreatedTotal = (records) => {
+    let total = 0
+    records.map((r) => {
+      if (r.created !== 0) {
+        total = total + r.created
+      }
+      return total
+    })
+    setGlobalCreatedTotal(total)
   }
   const getGlobalStoppedTotal = (records) => {
     let total = 0
     records.map((r) => {
-      total = total + r.stopped
+      if (r.stopped !== 0) {
+        total = total + r.stopped
+      }
+      return total
     })
-    return total
+    setGlobalStoppedTotal(total)
   }
   const getGlobalTotal = (records) => {
     let total = 0
     records.map((r) => {
       total = total + (r.created + r.stopped + r.inProgress)
     })
-    return total
+    setGlobalTotal(total)
   }
   const getGlobalPercentStopped = (records) => {
     let totalStopped = 0
@@ -91,7 +115,7 @@ export default function DispatchReport() {
     getReport(date)
   }
   const disabledDate = (current) => {
-    return current && current.isSameOrAfter(moment())
+    return current && current.isSameOrAfter(moment().subtract(0, 'days').format('YYYY-MM-DD'))
   }
   return (
     <div className="my-5 flex flex-col space-y-3 px-10">
@@ -147,10 +171,10 @@ export default function DispatchReport() {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Project name</Table.HeaderCell>
+                <Table.HeaderCell>Total</Table.HeaderCell>
                 <Table.HeaderCell>Created</Table.HeaderCell>
                 <Table.HeaderCell>In progress</Table.HeaderCell>
                 <Table.HeaderCell>Stopped</Table.HeaderCell>
-                <Table.HeaderCell>Total</Table.HeaderCell>
                 <Table.HeaderCell>% Stopped</Table.HeaderCell>
               </Table.Row>
             </Table.Header>
@@ -161,33 +185,32 @@ export default function DispatchReport() {
                     <Table.Row key={index}>
                       <Table.Cell>{row.project}</Table.Cell>
                       <Table.Cell>
+                        {getTotal(row) === 0 ? (
+                          <span className="text-gray-200">-</span>
+                        ) : (
+                          <>{getTotal(row)}</>
+                        )}
+                      </Table.Cell>
+                      <Table.Cell>
                         {row.created === 0 ? (
-                          <span className="text-gray-200">0</span>
+                          <span className="text-gray-200">-</span>
                         ) : (
                           <>{row.created}</>
                         )}
                       </Table.Cell>
                       <Table.Cell>
                         {row.inProgress === 0 ? (
-                          <span className="text-gray-200">0</span>
+                          <span className="text-gray-200">-</span>
                         ) : (
                           <>{row.inProgress}</>
                         )}
                       </Table.Cell>
                       <Table.Cell>
                         {row.stopped === 0 ? (
-                          <span className="text-gray-200">0</span>
+                          <span className="text-gray-200">-</span>
                         ) : (
                           <>{row.stopped}</>
                         )}
-                      </Table.Cell>
-                      <Table.Cell>
-                        {getTotal(row) === 0 ? (
-                          <span className="text-gray-200">0</span>
-                        ) : (
-                          <>{getTotal(row)}</>
-                        )}
-                        {}
                       </Table.Cell>
                       <Table.Cell>{getPercentage(row)}</Table.Cell>
                     </Table.Row>
@@ -196,12 +219,12 @@ export default function DispatchReport() {
 
               <Table.Row className="bg-gray-50/50">
                 <Table.Cell></Table.Cell>
-                <Table.Cell>{getTotal(report?.report)}</Table.Cell>
                 <Table.Cell>
-                  {getGlobalInProgressTotal(report?.report)}
+                  {globalTotal}
                 </Table.Cell>
-                <Table.Cell>{getGlobalStoppedTotal(report?.report)}</Table.Cell>
-                <Table.Cell>{getGlobalTotal(report?.report)}</Table.Cell>
+                <Table.Cell>{globalCreatedTotal}</Table.Cell>
+                <Table.Cell>{globalInProgressTotal}</Table.Cell>
+                <Table.Cell>{globalStoppedTotal}</Table.Cell>
                 <Table.Cell>
                   {getGlobalPercentStopped(report?.report)}
                 </Table.Cell>

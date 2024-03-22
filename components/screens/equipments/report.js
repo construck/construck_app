@@ -1,19 +1,15 @@
 import React, { useEffect, useContext, useState, use } from 'react'
 import { Table, Segment, Loader, Dropdown } from 'semantic-ui-react'
 import { Modal, DatePicker } from 'antd'
-import MSubmitButton from './../../common/mSubmitButton'
+import MSubmitButton from '@/components//common/mSubmitButton'
 import { UserContext } from '../../../contexts/UserContext'
 import Menu from './menu'
 import Image from 'next/image'
 import _ from 'lodash'
 import moment from 'moment'
-import {
-  PlusIcon,
-  ArrowRightIcon,
-  ArrowDownTrayIcon,
-} from '@heroicons/react/24/outline'
+import { ArrowRightIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline'
 import Nodata from '@/assets/images/no-data.png'
-import { Header, Button } from '@/components/atoms'
+import { Header } from '@/components/atoms'
 import Download from './download'
 
 let url = process.env.NEXT_PUBLIC_BKEND_URL
@@ -43,7 +39,7 @@ export default function EquipmentReport() {
   }, [])
 
   const disabledDate = (current) => {
-    return current && current.isSameOrAfter(moment())
+    return current && current.isSameOrAfter(moment().subtract(0, 'days').format('YYYY-MM-DD'))
   }
 
   const getEquipmentTypes = () => {
@@ -247,7 +243,13 @@ export default function EquipmentReport() {
                         <Table.Cell>{index + 1}</Table.Cell>
                         <Table.Cell>{row.type}</Table.Cell>
                         <Table.Cell>{row.open + row.workshop}</Table.Cell>
-                        <Table.Cell>{row.open}</Table.Cell>
+                        <Table.Cell>
+                          {row.open === 0 ? (
+                            <span className="text-gray-200">-</span>
+                          ) : (
+                            <>{row.open}</>
+                          )}
+                        </Table.Cell>
                         <Table.Cell>
                           {_.round(
                             (row.open * 100) / (row.open + row.workshop),
@@ -255,7 +257,13 @@ export default function EquipmentReport() {
                           )}
                           %
                         </Table.Cell>
-                        <Table.Cell>{row.workshop}</Table.Cell>
+                        <Table.Cell>
+                          {row.workshop === 0 ? (
+                            <span className="text-gray-200">-</span>
+                          ) : (
+                            <>{row.workshop}</>
+                          )}
+                        </Table.Cell>
                         <Table.Cell>
                           {_.round(
                             (row.workshop * 100) / (row.workshop + row.open),
