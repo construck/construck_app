@@ -30,8 +30,14 @@ export default function MenuBar() {
   let role = user?.userType
 
   let canSeeDashboard = user?.permissions?.canSeeDashboard || role == 'admin'
-  let canSeeDispatches = user?.permissions?.canSeeDispatches || role == 'admin' || role == 'revenue-admin'
+  let canSeeDispatches =
+    user?.permissions?.canSeeDispatches ||
+    role == 'admin' ||
+    role == 'revenue-admin'
   let canSeeUsers = user?.permissions?.canSeeUsers || role == 'admin'
+  let canSeeProjects = user?.permissions?.canSeeProjects || role == 'admin'
+  let canSeeCustomers = user?.permissions?.canSeeCustomers || role == 'admin'
+  let canSeeEquipment = user?.permissions?.canSeeEquipment || role == 'admin'
   let canSeeSettings = user?.permissions?.canSeeSettings || role == 'admin'
   let canSeeDrivers = user?.permissions?.canSeeDrivers || role == 'admin'
   let canSeeVendors = user?.permissions?.canSeeVendors || role == 'admin'
@@ -110,7 +116,7 @@ export default function MenuBar() {
           </div>
         )}
 
-        {!isVendor && !isCustomer && (
+        {!isVendor && !isCustomer && canSeeCustomers && (
           <>
             <div
               className={
@@ -126,34 +132,6 @@ export default function MenuBar() {
               </div>
             </div>
 
-            <div
-              className={
-                screen === 'equipments'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
-              }
-              onClick={() => setScreen('equipments')}
-            >
-              <TruckIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">
-                Equipment
-              </div>
-            </div>
-
-            <div
-              className={
-                screen === 'projects'
-                  ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
-                  : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
-              }
-              onClick={() => setScreen('projects')}
-            >
-              <QueueListIcon className="h-5 w-5" />
-              <div className="hidden w-1/2 font-semibold md:block">
-                Projects
-              </div>
-            </div>
-
             {/* <div
               className={
                 screen === 'profile'
@@ -166,6 +144,34 @@ export default function MenuBar() {
               <div className="hidden w-1/2 font-semibold md:block">Profile</div>
             </div> */}
           </>
+        )}
+
+        {canSeeEquipment && (
+          <div
+            className={
+              screen === 'equipments'
+                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+            }
+            onClick={() => setScreen('equipments')}
+          >
+            <TruckIcon className="h-5 w-5" />
+            <div className="hidden w-1/2 font-semibold md:block">Equipment</div>
+          </div>
+        )}
+
+        {canSeeProjects && (
+          <div
+            className={
+              screen === 'projects'
+                ? 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 bg-gray-50 py-5 text-sky-700'
+                : 'flex w-full cursor-pointer flex-row items-center justify-center space-x-3 py-5 text-black'
+            }
+            onClick={() => setScreen('projects')}
+          >
+            <QueueListIcon className="h-5 w-5" />
+            <div className="hidden w-1/2 font-semibold md:block">Projects</div>
+          </div>
         )}
 
         {canSeeUsers && (

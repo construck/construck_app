@@ -275,7 +275,6 @@ export default function Users() {
     setEmail(data?.email)
     setRole(data?.userType)
     setUserPermissions(data?.permissions || {})
-
   }
 
   function updateUser() {
@@ -378,6 +377,9 @@ export default function Users() {
       { name: 'canSeeDashboard', label: 'Can View Dashboards' },
       { name: 'canSeeUsers', label: 'Can View Users' },
       { name: 'canSeeDrivers', label: 'Can View Drivers' },
+      { name: 'canSeeCustomers', label: 'Can View Customers' },
+      { name: 'canSeeProjects', label: 'Can View Projects' },
+      { name: 'canSeeEquipment', label: 'Can View Equipment' },
       { name: 'canSeeVendors', label: 'Can View Vendors' },
       { name: 'canSeeSettings', label: 'Can View Settings' },
       { name: 'canDownloadDispatches', label: 'Can Download Dispatches' },
