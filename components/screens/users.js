@@ -275,7 +275,6 @@ export default function Users() {
     setEmail(data?.email)
     setRole(data?.userType)
     setUserPermissions(data?.permissions || {})
-
   }
 
   function updateUser() {
