@@ -184,7 +184,7 @@ const getTotalDuration = (dailyWork, uom) => {
 
   if (duration)
     return uom === 'hour'
-      ? _.round(duration) + 'h'
+      ? _.round(duration,12) + 'h'
       : Math.round(duration * 100) / 100 + 'd'
 }
 
