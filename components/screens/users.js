@@ -373,13 +373,14 @@ export default function Users() {
       { name: 'canMoveAssets', label: 'Can Move Assets' },
       { name: 'canDispatch', label: 'Can Create Dispatch' },
       { name: 'canStartAndStopJob', label: 'Can Start and Stop Dispatches' },
-      { name: 'canViewRevenues', label: 'Can View Revenues' },
-      { name: 'canViewDashboards', label: 'Can View Dashboards' },
-      { name: 'canViewUsers', label: 'Can View Users' },
-      { name: 'canViewDrivers', label: 'Can View Drivers' },
-      { name: 'canViewVendors', label: 'Can View Vendors' },
-      { name: 'canViewSettings', label: 'Can View Settings' },
+      { name: 'canSeeDispatches', label: 'Can View Dispatches' },
+      { name: 'canSeeDashboard', label: 'Can View Dashboards' },
+      { name: 'canSeeUsers', label: 'Can View Users' },
+      { name: 'canSeeDrivers', label: 'Can View Drivers' },
+      { name: 'canSeeVendors', label: 'Can View Vendors' },
+      { name: 'canSeeSettings', label: 'Can View Settings' },
       { name: 'canDownloadDispatches', label: 'Can Download Dispatches' },
+      { name: 'canReverseTransactions', label: 'Can Reverse Transactions' },
     ]
     return (
       <div className="flex flex-col space-y-3">

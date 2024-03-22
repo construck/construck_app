@@ -29,32 +29,21 @@ export default function MenuBar() {
 
   let role = user?.userType
 
-  let canSeeDashboard =
-    role === 'admin' || role === 'display' || role === 'revenue-admin'
-  let canSeeDispatches =
-    role === 'admin' ||
-    role === 'dispatch' ||
-    role === 'revenue' ||
-    role === 'vendor' ||
-    role === 'customer-admin' ||
-    role === 'customer-project-manager' ||
-    role === 'customer-site-manager' ||
-    role === 'revenue-admin'
-  let canSeeUsers =
-    role === 'admin' ||
-    role === 'customer-admin' ||
-    role === 'customer-project-manager'
-  let canSeeSettings = role === 'admin'
-  let canSeeDrivers = role === 'admin'
-  let canSeeVendors = role === 'admin'
-  let canReverseTransactions = role === 'admin' || role === 'revenue'
+  let canSeeDashboard = user?.permissions?.canSeeDashboard || role == 'admin'
+  let canSeeDispatches = user?.permissions?.canSeeDispatches || role == 'admin' || role == 'revenue-admin'
+  let canSeeUsers = user?.permissions?.canSeeUsers || role == 'admin'
+  let canSeeSettings = user?.permissions?.canSeeSettings || role == 'admin'
+  let canSeeDrivers = user?.permissions?.canSeeDrivers || role == 'admin'
+  let canSeeVendors = user?.permissions?.canSeeVendors || role == 'admin'
+  let canReverseTransactions = user?.permissions?.canReverseTransactions
   let isVendor = role === 'vendor'
   let isCustomer =
     role === 'customer-admin' ||
     role === 'customer-project-manager' ||
     role === 'customer-site-manager'
 
-  let isProjectManager = role === 'customer-project-manager' || role ==='customer-site-manager'
+  let isProjectManager =
+    role === 'customer-project-manager' || role === 'customer-site-manager'
 
   let isWorkshopUser =
     role === 'workshop-manager' ||

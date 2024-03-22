@@ -21,7 +21,7 @@ import moment from 'moment'
 export default function Customers() {
   let { user, setUser } = useContext(UserContext)
   //AUTORIZATION
-  let canCreateData = user.userType === 'admin'
+  let canCreateData = user?.permissions?.canCreateData
 
   let [customers, setCustomers] = useState([])
   let [ogCustomerList, setOgCustomerList] = useState([])

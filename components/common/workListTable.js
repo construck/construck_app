@@ -214,12 +214,9 @@ export default function WorkListTable({
   console.log('Data ', data)
 
   //Authorization
-  let canDispatch = user.userType === 'dispatch' || user.userType === 'admin'
-  let canStartAndStopJob =
-    user.userType === 'revenue' ||
-    user.userType === 'admin' ||
-    user.userType === 'vendor'
-  let canViewRenues = user.userType === 'revenue' || user.userType == 'admin'
+  let canDispatch = user?.permissions?.canDispatch
+  let canStartAndStopJob = user?.permissions?.canStartAndStopJob
+  let canViewRenues = user?.permissions?.canViewRenues
   let isVendor = user.userType === 'vendor'
 
   if (!data) data = []
