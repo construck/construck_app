@@ -28,12 +28,33 @@ export default function MenuBar() {
 
   let role = user?.userType
 
-  let canSeeDashboard = user?.permissions?.canSeeDashboard || role == 'admin'
-  let canSeeDispatches = user?.permissions?.canSeeDispatches || role == 'admin' || role == 'revenue-admin'
-  let canSeeUsers = user?.permissions?.canSeeUsers || role == 'admin'
+  let canSeeDashboard =
+    role === 'admin' ||
+    role === 'display' ||
+    role === 'revenue-admin' ||
+    user?.permissions?.canSeeDashboard
+  let canSeeDispatches =
+    role === 'admin' ||
+    role === 'dispatch' ||
+    role === 'revenue' ||
+    role === 'vendor' ||
+    role === 'customer-admin' ||
+    role === 'customer-project-manager' ||
+    role === 'customer-site-manager' ||
+    role === 'revenue-admin' ||
+    user?.permissions?.canSeeDispatches
+  let canSeeUsers =
+    role === 'admin' ||
+    role === 'customer-admin' ||
+    role === 'customer-project-manager' ||
+    user?.permissions?.canSeeUsers ||
+    role == 'admin'
   let canSeeSettings = user?.permissions?.canSeeSettings || role == 'admin'
   let canSeeDrivers = user?.permissions?.canSeeDrivers || role == 'admin'
   let canSeeVendors = user?.permissions?.canSeeVendors || role == 'admin'
+  let canSeeCustomers = user?.permissions?.canSeeCustomers || role == 'admin'
+  let canSeeEquipment = user?.permissions?.canSeeEquipment || role == 'admin'
+  let canSeeProjects = user?.permissions?.canSeeProjects || role == 'admin'
   let canReverseTransactions = user?.permissions?.canReverseTransactions
   let isVendor = role === 'vendor'
   let isCustomer =
@@ -73,7 +94,7 @@ export default function MenuBar() {
   ]
 
   return (
-    <div className="w-[130px] flex min-h-screen flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 md:w-[225px]">
+    <div className="flex min-h-screen w-[130px] flex-col overflow-y-auto border-r border-gray-200 bg-gray-100 md:w-[225px]">
       {/* <div className="my-5 items-center px-6 text-2xl font-bold text-zinc-800">
         Shabika App
       </div> */}
@@ -92,37 +113,41 @@ export default function MenuBar() {
         <ul role="list" className="flex flex-1 flex-col gap-y-7">
           <li>
             <ul role="list" className="space-y-1">
-              <li>
-                <div
-                  className={classNames(
-                    screen === 'dashboard' ? 'text-sky-700 bg-white' : null,
-                    menuClasses()
-                  )}
-                  onClick={() => setScreen('dashboard')}
-                >
-                  {/* <span className="text-lg">
+              {canSeeDashboard && (
+                <li>
+                  <div
+                    className={classNames(
+                      screen === 'dashboard' ? 'text-sky-700 bg-white' : null,
+                      menuClasses()
+                    )}
+                    onClick={() => setScreen('dashboard')}
+                  >
+                    {/* <span className="text-lg">
                     <Icon name="home" />
                   </span> */}
-                  <ChartBarIcon className="h-5 w-5" />
-                  <span>Dashboard</span>
-                </div>
-              </li>
-              <li>
-                <div
-                  className={classNames(
-                    screen === 'workData' ||
-                      screen === 'dispatchReports' ||
-                      screen === 'reversals'
-                      ? 'text-sky-700 bg-white'
-                      : null,
-                    menuClasses()
-                  )}
-                  onClick={() => setScreen('workData')}
-                >
-                  <DocumentDuplicateIcon className="h-5 w-5" />
-                  <span>Dispatches</span>
-                </div>
-              </li>
+                    <ChartBarIcon className="h-5 w-5" />
+                    <span>Dashboard</span>
+                  </div>
+                </li>
+              )}
+              {canSeeDispatches && (
+                <li>
+                  <div
+                    className={classNames(
+                      screen === 'workData' ||
+                        screen === 'dispatchReports' ||
+                        screen === 'reversals'
+                        ? 'text-sky-700 bg-white'
+                        : null,
+                      menuClasses()
+                    )}
+                    onClick={() => setScreen('workData')}
+                  >
+                    <DocumentDuplicateIcon className="h-5 w-5" />
+                    <span>Dispatches</span>
+                  </div>
+                </li>
+              )}
               {/* <li>
                 <div
                   className={classNames(
@@ -135,69 +160,79 @@ export default function MenuBar() {
                   <span>Cost</span>
                 </div>
               </li> */}
-              <li>
-                <div
-                  className={classNames(
-                    screen === 'customers' ? 'text-sky-700 bg-white' : null,
-                    menuClasses()
-                  )}
-                  onClick={() => setScreen('customers')}
-                >
-                  <UserGroupIcon className="h-5 w-5" />
-                  <span>Customers</span>
-                </div>
-              </li>
-              <li>
-                <div
-                  className={classNames(
-                    screen === 'equipments' || screen === 'equipmentReports'
-                      ? 'text-sky-700 bg-white'
-                      : null,
-                    menuClasses()
-                  )}
-                  onClick={() => setScreen('equipments')}
-                >
-                  <TruckIcon className="h-5 w-5" />
-                  <span>Equipments</span>
-                </div>
-              </li>
-              <li>
-                <div
-                  className={classNames(
-                    screen === 'projects' ? 'text-sky-700 bg-white' : null,
-                    menuClasses()
-                  )}
-                  onClick={() => setScreen('projects')}
-                >
-                  <QueueListIcon className="h-5 w-5" />
-                  <span>Projects</span>
-                </div>
-              </li>
-              <li>
-                <div
-                  className={classNames(
-                    screen === 'users' ? 'text-sky-700 bg-white' : null,
-                    menuClasses()
-                  )}
-                  onClick={() => setScreen('users')}
-                >
-                  <UsersIcon className="h-5 w-5" />
-                  <span>Users</span>
-                </div>
-              </li>
-              <li>
-                <div
-                  className={classNames(
-                    screen === 'drivers' ? 'text-sky-700 bg-white' : null,
-                    menuClasses()
-                  )}
-                  onClick={() => setScreen('drivers')}
-                >
-                  <IdentificationIcon className="h-5 w-5" />
-                  <span>Drivers</span>
-                </div>
-              </li>
-              <li>
+              {canSeeCustomers && (
+                <li>
+                  <div
+                    className={classNames(
+                      screen === 'customers' ? 'text-sky-700 bg-white' : null,
+                      menuClasses()
+                    )}
+                    onClick={() => setScreen('customers')}
+                  >
+                    <UserGroupIcon className="h-5 w-5" />
+                    <span>Customers</span>
+                  </div>
+                </li>
+              )}
+              {canSeeEquipment && (
+                <li>
+                  <div
+                    className={classNames(
+                      screen === 'equipments' || screen === 'equipmentReports'
+                        ? 'text-sky-700 bg-white'
+                        : null,
+                      menuClasses()
+                    )}
+                    onClick={() => setScreen('equipments')}
+                  >
+                    <TruckIcon className="h-5 w-5" />
+                    <span>Equipment</span>
+                  </div>
+                </li>
+              )}
+              {canSeeProjects && (
+                <li>
+                  <div
+                    className={classNames(
+                      screen === 'projects' ? 'text-sky-700 bg-white' : null,
+                      menuClasses()
+                    )}
+                    onClick={() => setScreen('projects')}
+                  >
+                    <QueueListIcon className="h-5 w-5" />
+                    <span>Projects</span>
+                  </div>
+                </li>
+              )}
+              {canSeeUsers && (
+                <li>
+                  <div
+                    className={classNames(
+                      screen === 'users' ? 'text-sky-700 bg-white' : null,
+                      menuClasses()
+                    )}
+                    onClick={() => setScreen('users')}
+                  >
+                    <UsersIcon className="h-5 w-5" />
+                    <span>Users</span>
+                  </div>
+                </li>
+              )}
+              {canSeeDrivers && (
+                <li>
+                  <div
+                    className={classNames(
+                      screen === 'drivers' ? 'text-sky-700 bg-white' : null,
+                      menuClasses()
+                    )}
+                    onClick={() => setScreen('drivers')}
+                  >
+                    <IdentificationIcon className="h-5 w-5" />
+                    <span>Drivers</span>
+                  </div>
+                </li>
+              )}
+              {canSeeVendors && <li>
                 <div
                   className={classNames(
                     screen === 'vendors' ? 'text-sky-700 bg-white' : null,
@@ -208,7 +243,7 @@ export default function MenuBar() {
                   <UserGroupIcon className="h-5 w-5" />
                   <span>Vendors</span>
                 </div>
-              </li>
+              </li>}
               <li>
                 <div
                   className={classNames(

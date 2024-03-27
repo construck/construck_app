@@ -275,7 +275,6 @@ export default function Users() {
     setEmail(data?.email)
     setRole(data?.userType)
     setUserPermissions(data?.permissions || {})
-
   }
 
   function updateUser() {
@@ -370,18 +369,21 @@ export default function Users() {
 
   function buildAdditionalPermissions() {
     let permissions = [
-      { name: 'canCreateData', label: 'Can Create Data' },
-      { name: 'canMoveAssets', label: 'Can Move Assets' },
-      { name: 'canDispatch', label: 'Can Create Dispatch' },
-      { name: 'canStartAndStopJob', label: 'Can Start and Stop Dispatches' },
+      // { name: 'canCreateData', label: 'Can Create Data' },
+      // { name: 'canMoveAssets', label: 'Can Move Assets' },
+      // { name: 'canDispatch', label: 'Can Create Dispatch' },
+      // { name: 'canStartAndStopJob', label: 'Can Start and Stop Dispatches' },
       { name: 'canSeeDispatches', label: 'Can View Dispatches' },
       { name: 'canSeeDashboard', label: 'Can View Dashboards' },
       { name: 'canSeeUsers', label: 'Can View Users' },
+      { name: 'canSeeCustomers', label: 'Can View Customers' },
       { name: 'canSeeDrivers', label: 'Can View Drivers' },
       { name: 'canSeeVendors', label: 'Can View Vendors' },
+      { name: 'canSeeEquipment', label: 'Can View Equipment' },
+      { name: 'canSeeProjects', label: 'Can View Projects' },
       { name: 'canSeeSettings', label: 'Can View Settings' },
-      { name: 'canDownloadDispatches', label: 'Can Download Dispatches' },
-      { name: 'canReverseTransactions', label: 'Can Reverse Transactions' },
+      // { name: 'canDownloadDispatches', label: 'Can Download Dispatches' },
+      // { name: 'canReverseTransactions', label: 'Can Reverse Transactions' },
     ]
     return (
       <div className="flex flex-col space-y-3">
@@ -412,7 +414,7 @@ export default function Users() {
           <MSubmitButton
             submit={() => setViewPort('new')}
             intent="primary"
-            icon={<PlusIcon className="h-5 w-5 text-zinc-800" />}
+            icon={<PlusIcon className="text-zinc-800 h-5 w-5" />}
             label="New"
           />
         )}
@@ -438,7 +440,7 @@ export default function Users() {
             <MSubmitButton
               submit={getUsers}
               intent="neutral"
-              icon={<ArrowPathIcon className="h-5 w-5 text-zinc-800" />}
+              icon={<ArrowPathIcon className="text-zinc-800 h-5 w-5" />}
               label="Refresh"
             />
           </>
@@ -451,7 +453,7 @@ export default function Users() {
               getUsers()
             }}
             intent="primary"
-            icon={<ArrowLeftIcon className="h-5 w-5 text-zinc-800" />}
+            icon={<ArrowLeftIcon className="text-zinc-800 h-5 w-5" />}
             label="Back"
           />
         )}
