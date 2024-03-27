@@ -36,7 +36,7 @@ import moment from 'moment'
 export default function Equipments() {
   let { user, setUser } = useContext(UserContext)
   //AUTORIZATION
-  let canCreateData = user?.permissions?.canCreateData
+  let canCreateData = user.userType === 'admin' || user?.permissions?.canCreateData
   let canMoveAssets = user?.permissions?.canMoveAssets
 
   let [submitting, setSubmitting] = useState(false)
